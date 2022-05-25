@@ -1,0 +1,110 @@
+{
+	"name": "Lookup-SourceFiles",
+	"properties": {
+		"activities": [
+			{
+				"name": "Lookup-SourceFiles",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DS_Config_Yellow_Taxi_File_List",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "For-Each-File",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Lookup-SourceFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup-SourceFiles').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "AWS-to-Blob-Taxy-Copy",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"year": {
+										"value": "@item().dataYear",
+										"type": "Expression"
+									},
+									"month": "01",
+									"sourceBaseURL": {
+										"value": "@item().sourceBaseURL",
+										"type": "Expression"
+									},
+									"sourceRelativeURL": {
+										"value": "@item().sourceRelativeURL",
+										"type": "Expression"
+									},
+									"sinkContainer": {
+										"value": "@item().sinkContainer",
+										"type": "Expression"
+									},
+									"sinkRelativeURL": {
+										"value": "@item().sinkRelativeURL",
+										"type": "Expression"
+									},
+									"fileName": {
+										"value": "@item().fileName",
+										"type": "Expression"
+									},
+									"fileExtension": {
+										"value": "@item().fileExtension",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"folder": {
+			"name": "NY-Taxi-Project-Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-25T03:28:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

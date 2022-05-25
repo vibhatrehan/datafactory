@@ -1,0 +1,137 @@
+{
+	"name": "AWS-to-Blob-Taxy-Copy",
+	"properties": {
+		"activities": [
+			{
+				"name": "AWS-to-Blob-Taxi-Data-Copy",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"storeSettings": {
+							"type": "HttpReadSettings",
+							"requestMethod": "GET"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_Source_AWS_TripData_Yellow_Taxi",
+						"type": "DatasetReference",
+						"parameters": {
+							"year": {
+								"value": "@pipeline().parameters.year",
+								"type": "Expression"
+							},
+							"month": {
+								"value": "@pipeline().parameters.month",
+								"type": "Expression"
+							},
+							"sourceRelativeURL": {
+								"value": "@pipeline().parameters.sourceRelativeURL",
+								"type": "Expression"
+							},
+							"sourceBaseURL": {
+								"value": "@pipeline().parameters.sourceBaseURL",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_Sink_Raw_NY_Yellow_Taxi",
+						"type": "DatasetReference",
+						"parameters": {
+							"year": {
+								"value": "@pipeline().parameters.year",
+								"type": "Expression"
+							},
+							"month": {
+								"value": "@pipeline().parameters.month",
+								"type": "Expression"
+							},
+							"sinkContainer": {
+								"value": "@pipeline().parameters.sinkContainer",
+								"type": "Expression"
+							},
+							"sinkRelativeURL": {
+								"value": "@pipeline().parameters.sinkRelativeURL",
+								"type": "Expression"
+							},
+							"fileName": {
+								"value": "@pipeline().parameters.fileName",
+								"type": "Expression"
+							},
+							"fileExtension": {
+								"value": "@pipeline().parameters.fileExtension",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"year": {
+				"type": "string",
+				"defaultValue": "2022"
+			},
+			"month": {
+				"type": "string",
+				"defaultValue": "02"
+			},
+			"sourceBaseURL": {
+				"type": "string"
+			},
+			"sourceRelativeURL": {
+				"type": "string"
+			},
+			"sinkContainer": {
+				"type": "string"
+			},
+			"sinkRelativeURL": {
+				"type": "string"
+			},
+			"fileName": {
+				"type": "string"
+			},
+			"fileExtension": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "NY-Taxi-Project-Pipelines"
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-05-25T03:28:39Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

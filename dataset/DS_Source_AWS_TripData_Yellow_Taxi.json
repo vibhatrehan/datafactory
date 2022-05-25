@@ -1,0 +1,46 @@
+{
+	"name": "DS_Source_AWS_TripData_Yellow_Taxi",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Http_Connector",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"sourceBaseURL": {
+					"value": "@dataset().sourceBaseURL",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"year": {
+				"type": "string"
+			},
+			"month": {
+				"type": "string"
+			},
+			"sourceRelativeURL": {
+				"type": "string"
+			},
+			"sourceBaseURL": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "NY-Taxi-Project-Datasets"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().sourceRelativeURL",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

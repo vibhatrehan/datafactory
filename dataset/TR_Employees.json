@@ -1,0 +1,27 @@
+{
+	"name": "TR_Employees",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_DataTreasreBox",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "OnPrem-Employees"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Employees_Raw.csv",
+				"folderPath": "Employees",
+				"fileSystem": "postgres-target"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

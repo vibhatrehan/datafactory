@@ -1,0 +1,18 @@
+{
+	"name": "DestinationBlobRoot",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Storage_destination_DataTreasureCopy",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "azureml"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

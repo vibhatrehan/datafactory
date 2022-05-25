@@ -1,0 +1,18 @@
+{
+	"name": "IR-Azure-Non-Managed-VNET",
+	"properties": {
+		"type": "Managed",
+		"description": "Azure IR without ",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "Central India",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 10,
+					"cleanup": false
+				}
+			}
+		}
+	}
+}

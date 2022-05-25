@@ -1,0 +1,9 @@
+{
+	"name": "DemoLearnDataFactory",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6ff7be35-577b-4f2f-973d-481b9536d6df",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}

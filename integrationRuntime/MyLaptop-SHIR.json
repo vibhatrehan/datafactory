@@ -1,0 +1,7 @@
+{
+	"name": "MyLaptop-SHIR",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "SHIR installed on my Laptop"
+	}
+}

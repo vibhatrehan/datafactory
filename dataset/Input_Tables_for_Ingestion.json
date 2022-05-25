@@ -1,0 +1,34 @@
+{
+	"name": "Input_Tables_for_Ingestion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ADLS_DataTreasreBox",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "OnPrem-Employees"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "table_ingestion_list.json",
+				"folderPath": "config",
+				"fileSystem": "aml-input-datasets"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"dbName": {
+					"type": "string"
+				},
+				"tableName": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

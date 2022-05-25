@@ -1,0 +1,23 @@
+{
+	"name": "Http_Connector",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"description": "HTTP / HTTPS connector - mostly used for copying anonymous datasets",
+		"parameters": {
+			"sourceBaseURL": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "@{linkedService().sourceBaseURL}",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

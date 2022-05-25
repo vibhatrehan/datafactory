@@ -1,0 +1,18 @@
+{
+	"name": "ML_Linked_Service",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureMLService",
+		"typeProperties": {
+			"subscriptionId": "2dcaffce-9614-44a9-9aa2-5eea097a21ee",
+			"resourceGroupName": "phoenix",
+			"mlWorkspaceName": "Oracle",
+			"authentication": "MSI"
+		},
+		"connectVia": {
+			"referenceName": "IR-Azure-Non-Managed-VNET",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"name": "Laptop-IR",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "IR hosted on my Laptop"
+	}
+}

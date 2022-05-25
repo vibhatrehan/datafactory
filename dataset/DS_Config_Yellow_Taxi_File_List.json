@@ -1,0 +1,49 @@
+{
+	"name": "DS_Config_Yellow_Taxi_File_List",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Capstone_Data_Lake",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "NY-Taxi-Project-Datasets"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "NewYork-taxi-bulk-data-2011-2022.json",
+				"folderPath": "configs",
+				"fileSystem": "labs"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"sourceBaseURL": {
+					"type": "string"
+				},
+				"sourceRelativeURL": {
+					"type": "string"
+				},
+				"sinkContainer": {
+					"type": "string"
+				},
+				"sinkRelativeURL": {
+					"type": "string"
+				},
+				"fileName": {
+					"type": "string"
+				},
+				"fileExtension": {
+					"type": "string"
+				},
+				"dataYear": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
